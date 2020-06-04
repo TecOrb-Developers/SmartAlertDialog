@@ -20,17 +20,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        context=this;
+        context = this;
 
-        final Typeface face = Typeface.createFromAsset(context.getAssets(),"ptsanswebbold.ttf");
-        final Typeface face2 = Typeface.createFromAsset(context.getAssets(),"ptsanswebregular.ttf");
+        final Typeface face = Typeface.createFromAsset(context.getAssets(), "ptsanswebbold.ttf");
+        final Typeface face2 = Typeface.createFromAsset(context.getAssets(), "ptsanswebregular.ttf");
 
-        button=(Button)findViewById(R.id.button);
+        button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 new SmartDialogBuilder(context)
+                        //.setBackgroundColor(R.color.colorPrimary) set background color of the dialog
                         .setTitle("Smart Dialog")
                         .setSubTitle("This is the alert dialog to showing alert to user")
                         .setCancalable(false)
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                         .setPositiveButton("OK", new SmartDialogClickListener() {
                             @Override
                             public void onClick(SmartDialog smartDialog) {
-                                    smartDialog.dismiss();
+                                smartDialog.dismiss();
                             }
                         }).setNegativeButton("Cancel", new SmartDialogClickListener() {
                     @Override

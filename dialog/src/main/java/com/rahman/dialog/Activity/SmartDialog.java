@@ -5,6 +5,9 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,7 +17,8 @@ import com.rahman.dialog.R;
 
 public class SmartDialog {
     private Dialog dialog;
-    private TextView titleTV, subTitleTv,tvOK,tvCancel;
+    private LinearLayout container;
+    private TextView titleTV, subTitleTv, tvOK, tvCancel;
     private LinearLayout okButtonTv, cancelButtonTV;
     //private View separator;
     private SmartDialogClickListener okButtonClickListener;
@@ -22,10 +26,10 @@ public class SmartDialog {
     private boolean isNegativeBtnHide;
 
 
-    public SmartDialog(Context context, String title, String subTitle, Typeface titleFont,
-                       Typeface subtitleFont, boolean isCancelable,boolean isNegativeBtnHide) {
+    public SmartDialog(Context context, int backgroundColor, String title, String subTitle, Typeface titleFont,
+                       Typeface subtitleFont, boolean isCancelable, boolean isNegativeBtnHide) {
 
-        this.isNegativeBtnHide=isNegativeBtnHide;
+        this.isNegativeBtnHide = isNegativeBtnHide;
         dialog = new Dialog(context);
         dialog.setContentView(R.layout.activity_dialog);
         dialog.setCancelable(isCancelable);
@@ -34,6 +38,7 @@ public class SmartDialog {
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         initDialogViw();
+        setBackgroundColor(context, backgroundColor);
         setTitle(title);
         setSubtitle(subTitle);
         setSubTitleFont(subtitleFont);
@@ -62,6 +67,12 @@ public class SmartDialog {
             //separator.setVisibility(View.GONE);
         }
         dialog.show();
+    }
+
+    public void setBackgroundColor(Context context, int color) {
+        Drawable background = container.getBackground();
+        GradientDrawable shapeDrawable = (GradientDrawable) background;
+        shapeDrawable.setColor(ContextCompat.getColor(context, color));
     }
 
     public void setTitle(String title) {
@@ -121,6 +132,7 @@ public class SmartDialog {
 
     //init all view here
     private void initDialogViw() {
+        container = dialog.findViewById(R.id.container);
         titleTV = dialog.findViewById(R.id.tv1);
         subTitleTv = dialog.findViewById(R.id.tv2);
         okButtonTv = dialog.findViewById(R.id.btnDialogOk);
