@@ -11,11 +11,13 @@ public class SmartDialogBuilder {
     private Typeface titleTf, subTitleTf;
     private boolean isCancelable;
     private int backgroundColor = android.R.color.white;
-    private String title, subtitle, okButtonLable, cancelButtonLable;
+    private String title, subtitle, okButtonLable, cancelButtonLable, neutralButtonLabel;
     private Context context;
     private SmartDialogClickListener okListener;
     private SmartDialogClickListener cancelListener;
+    private SmartDialogClickListener nutralBtnListener;
     private boolean isNegativeBtnHide;
+    private boolean hasNeutralBtn = false;
 
     public SmartDialogBuilder(Context context) {
         this.context = context;
@@ -58,6 +60,12 @@ public class SmartDialogBuilder {
         return this;
     }
 
+    public SmartDialogBuilder setNeutralButton(String label, SmartDialogClickListener listener) {
+        this.nutralBtnListener = listener;
+        this.neutralButtonLabel = label;
+        return this;
+    }
+
     public SmartDialogBuilder setCancalable(boolean isCancelable) {
         this.isCancelable = isCancelable;
         return this;
@@ -68,10 +76,16 @@ public class SmartDialogBuilder {
         return this;
     }
 
+    public SmartDialogBuilder useNeutralButton(boolean use) {
+        this.hasNeutralBtn = use;
+        return this;
+    }
+
     public SmartDialog build() {
-        SmartDialog dialog = new SmartDialog(context, backgroundColor, title, subtitle, titleTf, subTitleTf, isCancelable, isNegativeBtnHide);
+        SmartDialog dialog = new SmartDialog(context, backgroundColor, title, subtitle, titleTf, subTitleTf, isCancelable, isNegativeBtnHide, hasNeutralBtn);
         dialog.setNegative(cancelButtonLable, cancelListener);
         dialog.setPositive(okButtonLable, okListener);
+        dialog.setNeutral(neutralButtonLabel, nutralBtnListener);
         return dialog;
     }
 }

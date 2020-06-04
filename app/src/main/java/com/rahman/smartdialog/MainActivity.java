@@ -38,18 +38,27 @@ public class MainActivity extends AppCompatActivity {
                         .setTitleFont(face)
                         .setSubTitleFont(face2)
                         .setNegativeButtonHide(false)
+                        .useNeutralButton(true)
                         .setPositiveButton("OK", new SmartDialogClickListener() {
                             @Override
                             public void onClick(SmartDialog smartDialog) {
                                 smartDialog.dismiss();
                             }
-                        }).setNegativeButton("Cancel", new SmartDialogClickListener() {
-                    @Override
-                    public void onClick(SmartDialog smartDialog) {
-                        smartDialog.dismiss();
+                        })
+                        .setNegativeButton("Cancel", new SmartDialogClickListener() {
+                            @Override
+                            public void onClick(SmartDialog smartDialog) {
+                                smartDialog.dismiss();
 
-                    }
-                }).build().show();
+                            }
+                        })
+                        .setNeutralButton("Later", new SmartDialogClickListener() {
+                            @Override
+                            public void onClick(SmartDialog smartDialog) {
+                                smartDialog.dismiss();
+                            }
+                        })
+                        .build().show();
             }
         });
 

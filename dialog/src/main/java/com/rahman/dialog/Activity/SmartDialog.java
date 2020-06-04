@@ -18,18 +18,21 @@ import com.rahman.dialog.R;
 public class SmartDialog {
     private Dialog dialog;
     private LinearLayout container;
-    private TextView titleTV, subTitleTv, tvOK, tvCancel;
-    private LinearLayout okButtonTv, cancelButtonTV;
+    private TextView titleTV, subTitleTv, tvOK, tvNeutral, tvCancel;
+    private LinearLayout okButtonTv, cancelButtonTV, neutralButtonTv;
     //private View separator;
     private SmartDialogClickListener okButtonClickListener;
     private SmartDialogClickListener cancelButtonClickListener;
+    private SmartDialogClickListener neutralButtonClickListener;
     private boolean isNegativeBtnHide;
+    private boolean hasNeutralBtn;
 
 
     public SmartDialog(Context context, int backgroundColor, String title, String subTitle, Typeface titleFont,
-                       Typeface subtitleFont, boolean isCancelable, boolean isNegativeBtnHide) {
+                       Typeface subtitleFont, boolean isCancelable, boolean isNegativeBtnHide, boolean hasNeutralBtn) {
 
         this.isNegativeBtnHide = isNegativeBtnHide;
+        this.hasNeutralBtn = hasNeutralBtn;
         dialog = new Dialog(context);
         dialog.setContentView(R.layout.activity_dialog);
         dialog.setCancelable(isCancelable);
@@ -61,10 +64,20 @@ public class SmartDialog {
         }
     }
 
+    public void setNeutral(String neutralBtnLabel, SmartDialogClickListener listener) {
+        if (listener != null) {
+            this.neutralButtonClickListener = listener;
+            this.dismiss();
+            setNeutralBtnLabel(neutralBtnLabel);
+        }
+    }
+
     public void show() {
         if (isNegativeBtnHide) {
             cancelButtonTV.setVisibility(View.GONE);
-            //separator.setVisibility(View.GONE);
+        }
+        if (!hasNeutralBtn) {
+            neutralButtonTv.setVisibility(View.GONE);
         }
         dialog.show();
     }
@@ -91,11 +104,16 @@ public class SmartDialog {
         tvCancel.setText(negative);
     }
 
+    private void setNeutralBtnLabel(String neutralBtnLabel) {
+        tvNeutral.setText(neutralBtnLabel);
+    }
+
     private void setSubTitleFont(Typeface appleFont) {
         if (appleFont != null) {
             //title_lbl.setTypeface(appleFont);
             subTitleTv.setTypeface(appleFont);
             tvOK.setTypeface(appleFont);
+            tvNeutral.setTypeface(appleFont);
             tvCancel.setTypeface(appleFont);
         }
     }
@@ -128,6 +146,14 @@ public class SmartDialog {
                 }
             }
         });
+        neutralButtonTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (neutralButtonClickListener != null) {
+                    neutralButtonClickListener.onClick(SmartDialog.this);
+                }
+            }
+        });
     }
 
     //init all view here
@@ -137,8 +163,10 @@ public class SmartDialog {
         subTitleTv = dialog.findViewById(R.id.tv2);
         okButtonTv = dialog.findViewById(R.id.btnDialogOk);
         cancelButtonTV = dialog.findViewById(R.id.btnDialogCancel);
+        neutralButtonTv = dialog.findViewById(R.id.btnDialogNeutral);
         //separator = dialog.findViewById(R.id.separatorView);
         tvOK = dialog.findViewById(R.id.tvok);
+        tvNeutral = dialog.findViewById(R.id.tvNeutral);
         tvCancel = dialog.findViewById(R.id.tvCan);
     }
 }
