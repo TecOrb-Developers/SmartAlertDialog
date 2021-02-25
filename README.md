@@ -1,5 +1,13 @@
 # SmartAlertDialog 
 With this library you can easily use alert dialog in Android.<br>
+
+Made changes for : 
+- Remove default icon and add custom icon 
+- Long Contents can be scrollable
+- Can change title and sub title color
+- Can change the Fort
+
+
 <table>
 <tr>
 <td><img src="http://res.cloudinary.com/duyx74vfd/image/upload/v1528460761/1528459502779_vuomau.jpg" width=250><br>With Two Buttons</td>
