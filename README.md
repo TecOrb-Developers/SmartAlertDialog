@@ -13,27 +13,36 @@ To install the library just add this line to your gradle:
 	
 And add this where you want:
 
-	  new SmartDialogBuilder(context)
-                        .setTitle("Smart Dialog")
-                        .setSubTitle("This is the alert dialog to showing alert to user")
-                        .setCancalable(false)
-                        .setTitleFont(titleFont) //set title font
-                        .setSubTitleFont(subTitleFont) //set sub title font
-                        .setNegativeButtonHide(true) //hide cancel button
-                        .setPositiveButton("OK", new SmartDialogClickListener() {
-                            @Override
-                            public void onClick(SmartDialog smartDialog) {
-                                Toast.makeText(context,"Ok button Click",Toast.LENGTH_SHORT).show();
-                                    smartDialog.dismiss();
-                            }
-                        }).setNegativeButton("Cancel", new SmartDialogClickListener() {
+	  .setTitle(getString(R.string.txt_smart_dialog))
+                .setSubTitle(getString(R.string.txt_alert))
+                .setCancalable(false)
+                .setCustomIcon(R.drawable.icon)
+                .setTitleColor(getResources().getColor(R.color.colorPrimaryDark))
+                .setSubTitleColor(getResources().getColor(R.color.colorPrimaryDark))
+                .setTitleFont(tfBold)
+                .setSubTitleFont(tfRegular)
+                .setNegativeButtonHide(false)
+                .useNeutralButton(true)
+                .setPositiveButton(getString(R.string.txt_ok), new SmartDialogClickListener() {
                     @Override
                     public void onClick(SmartDialog smartDialog) {
-                        Toast.makeText(context,"Cancel button Click",Toast.LENGTH_SHORT).show();
+                        smartDialog.dismiss();
+                    }
+                })
+                .setNegativeButton(getString(R.string.txt_cancel), new SmartDialogClickListener() {
+                    @Override
+                    public void onClick(SmartDialog smartDialog) {
                         smartDialog.dismiss();
 
                     }
-                }).build().show();
+                })
+                .setNeutralButton(getString(R.string.txt_later), new SmartDialogClickListener() {
+                    @Override
+                    public void onClick(SmartDialog smartDialog) {
+                        smartDialog.dismiss();
+                    }
+                })
+                .build().show();
 	
 	
 If you liked this library, add a star to this project and feel free to make a <b>fork!</b><br>
