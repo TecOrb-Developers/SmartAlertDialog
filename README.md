@@ -7,6 +7,21 @@ Made changes for :
 - Can change title and sub title color
 - Can change the Fort
 
+Methods Used for:
+- setTitle()              //String 
+- setSubTitle()           //String
+- setCancalable()         //boolean
+- setCustomIcon()         //drawable 
+- setTitleColor()         //Color
+- setSubTitleColor()      //Color
+- setTitleFont()          //Typeface
+- setSubTitleFont()       //Typeface
+- setNegativeButtonHide() //boolean 
+- useNeutralButton()      //boolean 
+- setPositiveButton()     
+- setNeutralButton()
+- setNeutralButton()
+
 
 <table>
 <tr>
@@ -21,7 +36,8 @@ To install the library just add this line to your gradle:
 	
 And add this where you want:
 
-	  .setTitle(getString(R.string.txt_smart_dialog))
+           new SmartDialogBuilder(context)
+	        .setTitle(getString(R.string.txt_smart_dialog))
                 .setSubTitle(getString(R.string.txt_alert))
                 .setCancalable(false)
                 .setCustomIcon(R.drawable.icon)
