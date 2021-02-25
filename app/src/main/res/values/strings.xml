@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SmartDialog</string>
+    <string name="open_dialog">Open Dialog</string>
+    <string name="txt_smart_dialog">HR Smart Dialog</string>
+    <string name="txt_alert">This is the alert dialog to showing alert to user</string>
+    <string name="txt_ok">OK</string>
+    <string name="txt_cancel">Cancel</string>
+    <string name="txt_later">Later</string>
+</resources>
